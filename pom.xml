@@ -675,8 +675,8 @@
     </repositories>
     <pluginRepositories>
         <pluginRepository>
-            <id>central</id>
-            <url>https://repo.maven.apache.org/maven2</url>
+            <id>vulna-felickz2-feed</id>
+            <url>https://pkgs.dev.azure.com/felickz2/vulna-felickz2/_packaging/vulna-felickz2-feed/maven/v1</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
