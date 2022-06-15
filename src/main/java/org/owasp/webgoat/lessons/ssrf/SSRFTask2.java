@@ -43,8 +43,8 @@ public class SSRFTask2 extends AssignmentEndpoint {
 
     @PostMapping("/SSRF/task2")
     @ResponseBody
-    public AttackResult completed(@RequestParam String url) {
-        return furBall(url);
+    public AttackResult completed(@RequestParam String myUrl) {
+        return furBall(myUrl);
     }
 
     protected AttackResult furBall(String url) {
