@@ -663,7 +663,7 @@
 
     <repositories>
         <repository>
-          <id>vulna-felickz2-feed</id>
+          <id>central</id>
           <url>https://pkgs.dev.azure.com/felickz2/vulna-felickz2/_packaging/vulna-felickz2-feed/maven/v1</url>
           <releases>
             <enabled>true</enabled>
@@ -675,7 +675,7 @@
     </repositories>
     <pluginRepositories>
         <pluginRepository>
-            <id>vulna-felickz2-feed</id>
+            <id>central</id>
             <url>https://pkgs.dev.azure.com/felickz2/vulna-felickz2/_packaging/vulna-felickz2-feed/maven/v1</url>
             <snapshots>
                 <enabled>false</enabled>
