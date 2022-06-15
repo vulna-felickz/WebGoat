@@ -76,6 +76,12 @@ jobs:
           distribution: 'temurin'
           java-version: 17
           architecture: x64
+          
+    - if: matrix.language == 'java'
+      name: Configure maven credentials
+      uses: s4u/maven-settings-action@v2.6.0
+      with:
+        servers: '[{"id": "central", "username": "felickz2", "password": "${{ secrets.VULNA_FELICKZ2_FEED }}"}]'
         
     - if: matrix.language == 'java' 
       name: Build with Maven
