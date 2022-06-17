@@ -43,14 +43,14 @@ public class SSRFTask2 extends AssignmentEndpoint {
 
     @PostMapping("/SSRF/task2")
     @ResponseBody
-    public AttackResult completed(@RequestParam String url) {
-        return furBall(url);
+    public AttackResult completed(@RequestParam String myUrl) {
+        return furBall(myUrl);
     }
 
-    protected AttackResult furBall(String url) {
-        if (url.matches("http://ifconfig.pro")) {
+    protected AttackResult furBall(String myUrl) {
+        if (myUrl.matches("http://ifconfig.pro")) {
             String html;
-            try (InputStream in = new URL(url).openStream()) {
+            try (InputStream in = new URL(myUrl).openStream()) {
                 html = new String(in.readAllBytes(), StandardCharsets.UTF_8)
                         .replaceAll("\n","<br>"); // Otherwise the \n gets escaped in the response
             } catch (MalformedURLException e) {
