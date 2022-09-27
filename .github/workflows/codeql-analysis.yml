@@ -90,6 +90,11 @@ jobs:
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
       
+    - name: echo
+      run: |
+        echo "${{github.workspace}}"
+        echo "/home/runner/work/${{ github.event.repository.name }}/"
+      
     - uses: actions/upload-artifact@v3
       with:        
-        path: "results/*.sarif"
+        path: "${{github.workspace}}/results/*.sarif"
