@@ -93,4 +93,4 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:        
         name: sarif-results
-        path: "/home/runner/work/${{ github.event.repository.name }}/results/*.sarif"
+        path: "${{ runner.workspace }}/results/*.sarif"
