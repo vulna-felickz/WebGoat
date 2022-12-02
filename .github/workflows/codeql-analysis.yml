@@ -83,3 +83,8 @@ jobs:
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
+
+    - name: Upload CodeQL Analysis
+      uses: actions/upload-artifact@v3
+      with:
+        path: ${{runner.workspace}}/results/*.sarif
