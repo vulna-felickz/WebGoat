@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - develop
-			
 jobs:
   maven-action-detection:
     runs-on: ubuntu-latest
