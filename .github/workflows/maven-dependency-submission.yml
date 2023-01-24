@@ -4,7 +4,7 @@ on:
     branches:
       - develop
 jobs:
-  maven-action-detection:
+  maven-dependency-submission:
     runs-on: ubuntu-latest
     # The Dependency Submission API requires write permission
     permissions:
@@ -12,11 +12,13 @@ jobs:
     steps:          
       - name: 'Checkout Repository'
         uses: actions/checkout@v3
-      - name: 'Submit Dependency Snapshot'
+      # Uses com.github.ferstl:depgraph-maven-plugin:4.0.1 plugin to generate JSON output of the complete dependency graph
+      # which is then processed and submitted using the Dependency Submission Toolkit to the GitHub repository
+      - name: 'Submit Maven Dependency Snapshot'
         uses: advanced-security/maven-dependency-submission-action@v1
         
   
-  SBOM-action-detection:
+  dependency-graph-sbom-artifact:
     runs-on: ubuntu-latest
     #uses GitHub's dependency graph to automatically build an SBOM in SPDX 2.3 format.
     permissions: read-all
@@ -26,7 +28,8 @@ jobs:
         id: sbom
         env: 
           GITHUB_TOKEN: ${{ github.token }}
-      - uses: actions/upload-artifact@v3.1.0
+      - name: Upload SBOM as workflow artifact
+        uses: actions/upload-artifact@v3.1.0
         with: 
           path: ${{steps.sbom.outputs.fileName }}
           name: "SBOM"
