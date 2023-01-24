@@ -14,4 +14,13 @@ jobs:
         uses: actions/checkout@v3
       - name: 'Submit Dependency Snapshot'
         uses: advanced-security/maven-dependency-submission-action@v1
+      - name: Generate SBOM from dependency Graph
+        uses: jhutchings1/sbom-generator@v1.0.0
+        id: sbom
+        env: 
+          GITHUB_TOKEN: ${{ github.token }}
+      - uses: actions/upload-artifact@v3.1.0
+        with: 
+          path: ${{steps.sbom.outputs.fileName }}
+          name: "SBOM"
 
