@@ -28,6 +28,9 @@ jobs:
       actions: read
       contents: read
       security-events: write
+    env:
+      MAVEN_USERNAME: felickz2
+      MAVEN_CENTRAL_TOKEN: ${{ secrets.VULNA_FELICKZ2_FEED }}      
 
     strategy:
       fail-fast: false
@@ -76,12 +79,15 @@ jobs:
           distribution: 'temurin'
           java-version: 17
           architecture: x64
+          server-id: central # Value of the distributionManagement/repository/id field of the pom.xml
+          server-username: MAVEN_USERNAME # env variable for username in deploy
+          server-password: MAVEN_CENTRAL_TOKEN # env variable for token in deploy
           
-    - if: matrix.language == 'java'
-      name: Configure maven credentials
-      uses: s4u/maven-settings-action@v2.6.0
-      with:
-        servers: '[{"id": "central", "username": "felickz2", "password": "${{ secrets.VULNA_FELICKZ2_FEED }}"}]'
+  #  - if: matrix.language == 'java'
+  #    name: Configure maven credentials
+  #    uses: s4u/maven-settings-action@v2.6.0
+  #    with:
+  #      servers: '[{"id": "central", "username": "felickz2", "password": "${{ secrets.VULNA_FELICKZ2_FEED }}"}]'
         
     - if: matrix.language == 'java' 
       name: Build with Maven
