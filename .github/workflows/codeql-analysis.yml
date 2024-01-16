@@ -52,7 +52,7 @@ jobs:
         
         # Details on CodeQL's query packs refer to : https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
         # queries: security-extended,security-and-quality
-        queries: security-experimental,security-and-quality
+        config-file: felickz/custom-codeql/config/codeql-synthetics.yml@main
     
     - if: matrix.language == 'java'  
       name: Set up java 17
