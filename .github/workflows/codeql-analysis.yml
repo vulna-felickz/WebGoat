@@ -38,11 +38,11 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@v2
+      uses: github/codeql-action/init@v3
       with:
         languages: ${{ matrix.language }}
         #debug: true
@@ -52,24 +52,20 @@ jobs:
         
         # Details on CodeQL's query packs refer to : https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
         # queries: security-extended,security-and-quality
-        config-file: felickz/custom-codeql/config/codeql-synthetics.yml@main
+        #config-file: felickz/custom-codeql/config/codeql-synthetics.yml@main
+        config-file: GitHubSecurityLab/CodeQL-Community-Packs/configs/synthetics.yml@main
     
     - if: matrix.language == 'java'  
       name: Set up java 17
-      uses: actions/setup-java@v3
+      uses: actions/setup-java@v4
       with:
           distribution: 'temurin'
           java-version: 17
-          architecture: x64
-     
-    # manually run delombok as a shim until officially supported by CodeQL 
-    - name: Delombok
-      if: matrix.language == 'java'
-      uses: advanced-security/delombok@main
+          architecture: x64     
                  
     - if: matrix.language == 'java' 
       name: Build with Maven
       run: mvn -B package --file pom.xml
 
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v2
+      uses: github/codeql-action/analyze@v3
