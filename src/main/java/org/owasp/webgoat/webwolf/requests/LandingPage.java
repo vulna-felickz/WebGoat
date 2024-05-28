@@ -45,8 +45,8 @@ public class LandingPage {
         RequestMethod.PUT
       })
   public Callable<ResponseEntity<?>> ok(HttpServletRequest request) {
-    return () -> {
-      log.trace("Incoming request for: {}", Encode.forJava(request.getRequestURL()));
+    return () -> {      
+      log.trace("Incoming request for: {}", Encode.forJava(request.getRequestURL().toString()));
       return ResponseEntity.ok().build();
     };
   }
