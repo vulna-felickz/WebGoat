@@ -30,6 +30,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.owasp.encoder.Encode;
+import org.owasp.webgoat.webwolf.requests.EncoderUtil;
+
 
 @Controller
 @Slf4j
@@ -60,6 +62,12 @@ public class LandingPage {
        * Using the encodeForJava method wrapper
        */
       log.trace("Incoming request for: {}", encodeForJava(request.getRequestURL().toString()));
+
+      /*
+       * Using EncoderUtil.encodeForJava method wrapper
+       */
+      log.trace("Incoming request for: {}", EncoderUtil.encodeForJava(request.getRequestURL().toString()));
+
       return ResponseEntity.ok().build();
     };
   }
