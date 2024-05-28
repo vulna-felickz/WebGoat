@@ -72,6 +72,41 @@ public class LandingPage {
     };
   }
 
+  @RequestMapping(
+      method = {
+        RequestMethod.POST,
+        RequestMethod.GET,
+        RequestMethod.DELETE,
+        RequestMethod.PATCH,
+        RequestMethod.PUT
+      },
+      path = "/dto")
+  public Callable<ResponseEntity<?>> handleDto(MyDTO myDTO) {
+    return () -> {      
+      /*
+       * Initial Repro
+       */
+      log.trace("Incoming DTO event ID: {}", myDTO.getEventId());
+
+      /* 
+       * Directly using the Encode.forJava method
+       */
+      log.trace("Incoming DTO event ID: {}", Encode.forJava(myDTO.getEventId()));
+      
+      /*
+       * Using the encodeForJava method wrapper
+       */
+      log.trace("Incoming DTO event ID: {}", encodeForJava(myDTO.getEventId()));
+
+      /*
+       * Using EncoderUtil.encodeForJava method wrapper
+       */
+      log.trace("Incoming DTO event ID: {}", EncoderUtil.encodeForJava(myDTO.getEventId()));
+
+      return ResponseEntity.ok().build();
+    };
+  }
+
   // Create a private method called encodeForJava that takes a string and returns a string.
   // Use the Encode.forJava method to encode the input string and return the result.
   private String encodeForJava(String input) {
