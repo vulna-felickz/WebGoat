@@ -46,9 +46,28 @@ public class LandingPage {
       })
   public Callable<ResponseEntity<?>> ok(HttpServletRequest request) {
     return () -> {      
+      /*
+       * Initial Repro
+       */
       log.trace("Incoming request for: {}", request.getRequestURL().toString());
-      //log.trace("Incoming request for: {}", Encode.forJava(request.getRequestURL().toString()));
+
+      /* 
+       * Directly using the Encode.forJava method
+       */
+      log.trace("Incoming request for: {}", Encode.forJava(request.getRequestURL().toString()));
+      
+      /*
+       * Using the encodeForJava method wrapper
+       */
+      log.trace("Incoming request for: {}", encodeForJava(request.getRequestURL().toString()));
       return ResponseEntity.ok().build();
     };
   }
+
+  // Create a private method called encodeForJava that takes a string and returns a string.
+  // Use the Encode.forJava method to encode the input string and return the result.
+  private String encodeForJava(String input) {
+    return Encode.forJava(input);
+  }
 }
+
